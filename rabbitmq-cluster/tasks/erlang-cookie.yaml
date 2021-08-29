@@ -1,0 +1,12 @@
+---
+  # Configure RabbitMQ for cluster
+  - name: Creating new erlang cookie
+    copy:
+      dest: /var/lib/rabbitmq/.erlang.cookie
+      owner: rabbitmq
+      group: rabbitmq
+      mode: 0400
+      content: |
+        {{ rabbitmq_erlang_cookie }}
+    notify:
+      stop rabbitmq-server

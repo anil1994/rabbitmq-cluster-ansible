@@ -1,0 +1,16 @@
+---
+  - name: Install packages
+    yum:
+      name:
+        - socat
+        - logrotate
+      state: latest
+
+  - name: Install rabbit packages
+    yum:
+      name:
+        - erlang
+        - rabbitmq-server
+      state: latest
+      disablerepo: "*"
+      enablerepo: "rabbitmq_erlang,rabbitmq_server"

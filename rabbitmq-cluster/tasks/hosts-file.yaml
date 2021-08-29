@@ -1,0 +1,13 @@
+---
+  - blockinfile:
+      path: /etc/hosts
+      block: |
+        {%- for group in groups %}
+        {%- for inventory_host in groups[group] %}
+        {{ hostvars[inventory_host]["ansible_host"] }} {{ inventory_host }}
+        {% endfor -%}
+        {% endfor -%}
+      owner: root
+      group: root
+      mode: 0644
+      marker: "# {mark} ANSIBLE MANAGED BLOCK"

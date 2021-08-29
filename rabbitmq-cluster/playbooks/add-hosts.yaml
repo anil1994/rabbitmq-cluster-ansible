@@ -1,0 +1,14 @@
+- hosts: all
+  become: yes
+  become_user: root
+  handlers:
+  - import_tasks: ../handlers/main.yml
+  tasks:
+  - name: Configure hosts file for new ndoes
+    include_tasks: "{{ item }}"
+    loop:
+      - ../tasks/hosts-file.yaml
+
+  - name: configure name servers
+    shell: |
+      echo 'nameserver 8.8.8.8' >> /etc/resolv.conf

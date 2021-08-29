@@ -1,0 +1,8 @@
+[cluster]
+xxxxxxx  fqdn=rbmq01
+xxxxxxx  fqdn=rbmq02
+xxxxxxx fqdn=rbmq03
+xxxxxxx  fqdn=rbmq04
+xxxxxxxx  fqdn=rbmq05
+
+[new_nodes]

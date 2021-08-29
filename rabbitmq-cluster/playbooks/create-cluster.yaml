@@ -1,0 +1,19 @@
+---
+  - hosts: cluster
+    become: yes
+    become_user: root
+    handlers:
+    - import_tasks: ../handlers/main.yml
+    tasks:
+    - name: Create RabbitMQ cluster
+      include_tasks: "{{ item }}"
+      loop:
+        - ../tasks/repository.yaml
+        - ../tasks/hosts-file.yaml
+        - ../tasks/install.yaml
+        - ../tasks/erlang-cookie.yaml
+        - ../tasks/configure.yaml
+        - ../tasks/systemctl.yaml
+        - ../tasks/join-cluster.yaml
+        - ../tasks/create-admin-user.yaml
+        - ../tasks/enable-ha-queues.yaml

@@ -1,0 +1,27 @@
+---
+  - hosts: cluster,new_nodes
+    become: yes
+    become_user: root
+    handlers:
+    - import_tasks: ../handlers/main.yml
+    tasks:
+    - name: Configure hosts file for new ndoes
+      include_tasks: "{{ item }}"
+      loop:
+        - ../tasks/hosts-file.yaml
+
+  - hosts: new_nodes
+    become: yes
+    become_user: root
+    handlers:
+    - import_tasks: ../handlers/main.yml
+    tasks:
+    - name: Add nodes to current RabbitMQ cluster
+      include_tasks: "{{ item }}"
+      loop:
+        - ../tasks/repository.yaml
+        - ../tasks/install.yaml
+        - ../tasks/erlang-cookie.yaml
+        - ../tasks/configure.yaml
+        - ../tasks/systemctl.yaml
+        - ../tasks/join-cluster.yaml

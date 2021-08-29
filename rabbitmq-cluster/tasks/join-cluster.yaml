@@ -1,0 +1,11 @@
+---
+  - name: stop rabbitmq app
+    command: rabbitmqctl stop_app
+    when: rabbitmq_cluster_master != hostvars[inventory_hostname]["fqdn"]
+
+  - name: add this node to cluster
+    command: rabbitmqctl join_cluster rabbit@{{ rabbitmq_cluster_master }}
+    when: rabbitmq_cluster_master != hostvars[inventory_hostname]["fqdn"]
+
+  - name: start rabbitmq app
+    command: rabbitmqctl start_app

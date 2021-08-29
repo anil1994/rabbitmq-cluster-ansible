@@ -1,0 +1,40 @@
+# generals
+rabbitmq_erlang_cookie: WKRBTTEQRYPTQOPUKSVF
+rabbitmq_cluster_master: "{{ hostvars[groups['cluster'][0]]['fqdn'] }}"
+backup_queues_in_two_nodes: true
+rabbitmq_ulimit_open_files: 4096
+rabbitmq_use_longname: 'false'
+
+# user settings
+admin_user: admin
+admin_password: xxxxxxx
+
+# default ports
+rabbitmq_tls_port: 5671
+rabbitmq_amqp_port: 5672
+rabbitmq_epmd_port: 4369
+rabbitmq_node_port: 25672
+
+# plugins for HTTP API monitor
+rabbitmq_plugins:
+  - rabbitmq_management
+  - rabbitmq_management_agent
+  - rabbitmq_shovel
+  - rabbitmq_shovel_management
+
+# TLS/SSL support
+enable_tls: false
+# if true, only tls is supported which means amqp default port 5672 is not open anymore
+tls_only: false
+
+tls_verify: "verify_none"
+tls_fail_if_no_peer_cert: false
+
+cacertfile: ""
+cacertfile_dest: "/etc/rabbitmq/cacert.pem"
+
+certfile: ""
+certfile_dest: "/etc/rabbitmq/cert.pem"
+
+keyfile: ""
+keyfile_dest: "/etc/rabbitmq/key.pem"

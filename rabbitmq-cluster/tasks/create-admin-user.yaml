@@ -1,0 +1,25 @@
+---
+  # rc 70: user already exists
+  - name: create admin user
+    shell: |
+      rabbitmqctl add_user {{ admin_user }} {{ admin_password }}
+    delegate_to: "{{ hostvars[groups['cluster'][0]]['inventory_hostname'] }}"
+    run_once: true
+
+  - name: add admin user to administrator group
+    shell: |
+      rabbitmqctl set_user_tags {{ admin_user }} administrator
+    delegate_to: "{{ hostvars[groups['cluster'][0]]['inventory_hostname'] }}"
+    run_once: true
+
+  - name: set permissions on / vhost
+    shell: |
+      rabbitmqctl set_permissions {{ admin_user }} ".*" ".*" ".*"
+    delegate_to: "{{ hostvars[groups['cluster'][0]]['inventory_hostname'] }}"
+    run_once: true
+
+  - name: remove guest user
+    shell: |
+      rabbitmqctl delete_user guest
+    delegate_to: "{{ hostvars[groups['cluster'][0]]['inventory_hostname'] }}"
+    run_once: true
