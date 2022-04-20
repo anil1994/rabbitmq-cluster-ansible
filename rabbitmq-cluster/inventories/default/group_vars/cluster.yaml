@@ -4,6 +4,7 @@ rabbitmq_cluster_master: "{{ hostvars[groups['cluster'][0]]['fqdn'] }}"
 backup_queues_in_two_nodes: true
 rabbitmq_ulimit_open_files: 4096
 rabbitmq_use_longname: 'false'
+rabbitmq_data_path: /data
 
 # user settings
 admin_user: admin
